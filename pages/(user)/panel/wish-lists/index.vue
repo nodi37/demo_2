@@ -1,0 +1,1 @@
+<template>Wish lists</template>

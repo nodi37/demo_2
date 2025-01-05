@@ -1,0 +1,26 @@
+#__nuxt {
+  height: 100svh;
+  width: 100svw;
+  display: flex;
+  flex-direction: column;
+  background-color: light-dark(var(--light-color), white);
+}
+
+* {
+  scroll-behavior: smooth;
+  scroll-margin: 100px;
+  font-family: "Nunito", "Archivo", "DM Sans", "Public Sans", sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
