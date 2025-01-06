@@ -89,19 +89,14 @@ export const useAddressesStore = defineStore("addressesDataStore", () => {
   };
 
   // Init
-  const saveAddress = computed(() =>
-    isLoggedIn.value ? addRemoteAddress : addLocalAddress
-  );
-  const updateAddress = computed(() =>
-    isLoggedIn.value ? updateRemoteAddress : updateLocalAddress
-  );
-  const deleteAddress = computed(() =>
-    isLoggedIn.value ? deleteRemoteAddress : deleteLocalAddress
-  );
+  const saveAddress = computed(() => addLocalAddress); // isLoggedIn.value ? addRemoteAddress : addLocalAddress
+  const updateAddress = computed(() => updateLocalAddress); // isLoggedIn.value ? updateRemoteAddress : updateLocalAddress
+  const deleteAddress = computed(() => deleteLocalAddress); // isLoggedIn.value ? deleteRemoteAddress : deleteLocalAddress
 
   const init = async (userId?: string) => {
     const { success, data } = userId
-      ? await addressesApi.getAddressesByUserId(userId)
+      ? // ? await addressesApi.getAddressesByUserId(userId)
+        { success: true, data: [] }
       : { success: false, data: [] };
 
     isLoggedIn.value = success;
