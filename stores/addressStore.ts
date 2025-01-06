@@ -89,26 +89,20 @@ export const useAddressesStore = defineStore("addressesDataStore", () => {
   };
 
   // Init
-  const saveAddress = ref(addLocalAddress);
-  const updateAddress = ref(updateLocalAddress);
-  const deleteAddress = ref(deleteLocalAddress);
+  const saveAddress = computed(() =>
+    isLoggedIn.value ? addRemoteAddress : addLocalAddress
+  );
+  const updateAddress = computed(() =>
+    isLoggedIn.value ? updateRemoteAddress : updateLocalAddress
+  );
+  const deleteAddress = computed(() =>
+    isLoggedIn.value ? deleteRemoteAddress : deleteLocalAddress
+  );
 
   const init = async (userId?: string) => {
     const { success, data } = userId
-      ? // ? await addressesApi.getAddressesByUserId(userId)
-        { success: true, data: [] }
+      ? await addressesApi.getAddressesByUserId(userId)
       : { success: false, data: [] };
-
-    // Leave only local for demo
-    // if (success) {
-    //   saveAddress.value = addRemoteAddress;
-    //   updateAddress.value = updateRemoteAddress;
-    //   deleteAddress.value = deleteRemoteAddress;
-    // } else {
-    //   saveAddress.value = addLocalAddress;
-    //   updateAddress.value = updateLocalAddress;
-    //   deleteAddress.value = deleteLocalAddress;
-    // }
 
     isLoggedIn.value = success;
     currentUserId.value = userId ?? "";
